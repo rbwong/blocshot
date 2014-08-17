@@ -1,1 +1,1 @@
-web: gunicorn tadhack2014.wsgi
+web: gunicorn sgform.wsgi --log-file -
