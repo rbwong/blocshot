@@ -22,6 +22,16 @@ STATIC_PATH = os.path.join(PROJECT_PATH,'static')
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'static/media')
 MEDIA_URL = '/static/media/'
 
+import dj_database_url
+DATABASES['default'] =  dj_database_url.config()
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
+
+STATIC_ROOT = 'staticfiles'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
