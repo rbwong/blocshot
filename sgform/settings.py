@@ -54,7 +54,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'fandjango.middleware.FacebookMiddleware',
 )
 
 ROOT_URLCONF = 'sgform.urls'
