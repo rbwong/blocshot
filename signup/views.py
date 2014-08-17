@@ -31,5 +31,5 @@ class SignupPage(SuccessMessageMixin, CreateView):
     def dispatch(self, *args, **kwargs):
         if not request.facebook.signed_request.page.is_liked:
             return redirect('/like')
-)        else:
+        else:
             return super(SignupPage).dispatch(*args, **kwargs)
