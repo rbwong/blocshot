@@ -118,5 +118,36 @@
     <script src="{% static "js/jquery.dlmenu.js" %}"></script>
     <script src="{% static "js/wow.min.js" %}"></script>
     <script src="{% static "js/custom.js" %}"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+
+        FB.login(function(response) {
+          if (response.session) {
+
+              var user_id = response.session.uid;
+              var page_id = "632923070139972"; //coca cola
+              var fql_query = "SELECT uid FROM page_fan WHERE page_id = "+page_id+"and uid="+user_id;
+              var the_query = FB.Data.query(fql_query);
+
+              the_query.wait(function(rows) {
+
+                  if (rows.length == 1 && rows[0].uid == user_id) {
+                      alert('yeah!');
+                      //here you could also do some ajax and get the content for a "liker" instead of simply showing a hidden div in the page.
+
+                  } else {
+                      alert('boo!');
+                      //and here you could get the content for a non liker in ajax...
+                  }
+              });
+
+
+          } else {
+            // user is not logged in
+          }
+        });
+
+    });
+    </script>
 
 </html>
