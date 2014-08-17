@@ -27,9 +27,3 @@ class SignupPage(SuccessMessageMixin, CreateView):
     def form_invalid(self, form):
         print form.errors
         return self.render_to_response(self.get_context_data(form=form))
-
-    def dispatch(self, *args, **kwargs):
-        if not request.facebook.signed_request.page.is_liked:
-            return redirect('/like')
-        else:
-            return super(SignupPage).dispatch(*args, **kwargs)
