@@ -47,7 +47,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'signup',
-    'fandjango',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,11 +56,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'fandjango.middleware.FacebookMiddleware',
 )
-
-FACEBOOK_APPLICATION_ID = '632923070139972'
-FACEBOOK_APPLICATION_SECRET_KEY = 'd9537e0b694dd3d11bef8c1ffba74810'
-FACEBOOK_APPLICATION_NAMESPACE = 'enggsurvivalguide'
-FANDJANGO_SITE_URL = 'enggsurvivalguide2014.herokuapp.com'
 
 ROOT_URLCONF = 'sgform.urls'
 
