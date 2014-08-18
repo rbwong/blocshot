@@ -33,7 +33,6 @@
                     var fql_query = "SELECT uid FROM page_fan WHERE page_id=" + page_id + " and uid=" + user_id;
                   
                     FB.api('/me/likes/'+page_id, function(response) {
-                        alert('yeah');
                         if (response.data[0]) {
                             document.getElementById("like-wrong").style.display = 'none';
                             document.getElementById("like-ok").style.display = 'block';
