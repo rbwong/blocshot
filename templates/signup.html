@@ -38,10 +38,9 @@
                     },  function(response) {
                             console.log(response);
                             if(response){
-                                alert(':)');
                               document.getElementById("like-wrong").style.display = 'none';
                               document.getElementById("like-ok").style.display = 'block';
-                            } else {alert('boo');
+                            } else {
                               document.getElementById("like-wrong").style.display = 'block';
                               document.getElementById("like-ok").style.display = 'none';
                             }
@@ -52,7 +51,6 @@
                 }
             });
             FB.Event.subscribe('edge.create', function(response) {
-              alert('you liked this');
             });
         });
       </script>
