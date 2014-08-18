@@ -28,14 +28,13 @@
       $(document).ready(function(){
           FB.getLoginStatus(function(response) {
               if (response.status == 'connected') {
-                  alert('woo');
                   var user_id = response.authResponse.userID;
                   var page_id = "319460261534495";
                   var fql_query = "SELECT uid FROM page_fan WHERE page_id =" + page_id + " and uid=" + user_id;
                   var the_query = FB.Data.query(fql_query);
 
                   the_query.wait(function(rows) {
-
+                      alert('yeah');
                       if (rows.length == 1 && rows[0].uid == user_id) {
                          document.getElementById("like-wrong").style.display = 'none';
                          document.getElementById("like-ok").style.display = 'block';
