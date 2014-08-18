@@ -15,44 +15,65 @@
     <script src="{% static "js/jquery.js" %}"></script>
   </head>
   <body>
-      <script src="https://connect.facebook.net/en_US/all.js"></script>
+      <div id="fb-root"></div>
       <script>
-        FB.init({
-          appId  : '632923070139972',
-          status : true, 
-          cookie : true, 
-          xfbml  : true  
-        });
-      </script>
-      <script type="text/javascript">
-      $(document).ready(function() {
-            FB.login(function(response) {
-                if (response.status == 'connected') {
-                    var user_id = response.authResponse.userID;
-                    var page_id = "319460261534495";
-                    var fql_query = "SELECT uid FROM page_fan WHERE page_id=" + page_id + " and uid=" + user_id;
-                    
-                    FB.api({
-                        method:     "pages.isFan",
-                        page_id:     '319460261534495',
-                    },  function(response) {
-                            console.log(response);
-                            if(response){
-                              document.getElementById("like-wrong").style.display = 'none';
-                              document.getElementById("like-ok").style.display = 'block';
-                            } else {
-                              document.getElementById("like-wrong").style.display = 'block';
-                              document.getElementById("like-ok").style.display = 'none';
-                            }
-                        }
-                    );
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '632923070139972', // App ID
+            status     : true, // check login status
+            cookie     : true, // enable cookies to allow the server to access the session
+            xfbml      : true  // parse XFBML
+          });
+
+          FB.getLoginStatus(function(response) {
+            var page_id = "319460261534495";
+            if (response && response.authResponse) {
+              var user_id = response.authResponse.userID;
+              var fql_query = "SELECT uid FROM page_fan WHERE page_id = "+page_id+"and uid="+user_id;
+              FB.Data.query(fql_query).wait(function(rows) {
+                if (rows.length == 1 && rows[0].uid == user_id) {
+                  console.log("LIKE");
+                  document.getElementById("like-wrong").style.display = 'none';
+                  document.getElementById("like-ok").style.display = 'block';
                 } else {
-                    // user is not logged in
+                  console.log("NO LIKEY");
+                  document.getElementById("like-wrong").style.display = 'block';
+                  document.getElementById("like-ok").style.display = 'none';
                 }
-            });
-            FB.Event.subscribe('edge.create', function(response) {
-            });
-        });
+              });
+            } else {
+              FB.login(function(response) {
+                if (response && response.authResponse) {
+                  var user_id = response.authResponse.userID;
+                  var fql_query = "SELECT uid FROM page_fan WHERE page_id = "+page_id+"and uid="+user_id;
+                  FB.Data.query(fql_query).wait(function(rows) {
+                    if (rows.length == 1 && rows[0].uid == user_id) {
+                      console.log("LIKE");
+                      document.getElementById("like-wrong").style.display = 'none';
+                      document.getElementById("like-ok").style.display = 'block';
+                    } else {
+                      console.log("NO LIKEY");
+                      document.getElementById("like-wrong").style.display = 'block';
+                      document.getElementById("like-ok").style.display = 'none';
+                    }
+                  });
+                } else {
+                  console.log("NO LIKEY");
+                  document.getElementById("like-wrong").style.display = 'block';
+                  document.getElementById("like-ok").style.display = 'none';
+                }
+              }, {scope: 'user_likes'});
+            }
+          });
+        };
+
+        // Load the SDK Asynchronously
+        (function(d){
+          var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+          js = d.createElement('script'); js.id = id; js.async = true;
+          js.src = "//connect.facebook.net/en_US/all.js";
+          d.getElementsByTagName('head')[0].appendChild(js);
+        }(document));
       </script>
 
       <!-- gate handler -->
