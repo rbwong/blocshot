@@ -25,30 +25,28 @@
         });
       </script>
       <script type="text/javascript">
-      $(document).ready(function(){
-          FB.getLoginStatus(function(response) {
-              if (response.status == 'connected') {
-                  var user_id = response.authResponse.userID;
-                  var page_id = "319460261534495";
-                  var fql_query = "SELECT uid FROM page_fan WHERE page_id =" + page_id + " and uid=" + user_id;
-                  var the_query = FB.Data.query(fql_query);
-
-                  the_query.wait(function(rows) {
-                      alert('yeah');
-                      if (rows.length == 1 && rows[0].uid == user_id) {
-                         document.getElementById("like-wrong").style.display = 'none';
-                         document.getElementById("like-ok").style.display = 'block';
-                      } else {
-                         document.getElementById("like-wrong").style.display = 'block';
-                        document.getElementById("like-ok").style.display = 'none';
-                      }
-                  });
-              } else {
-                  // user is not logged in
-              }
-          });
-
-      });
+      $(document).ready(function() {
+            FB.login(function(response) {
+                if (response.status == 'connected') {
+                    var user_id = response.authResponse.userID;
+                    var page_id = "319460261534495";
+                    var fql_query = "SELECT uid FROM page_fan WHERE page_id=" + page_id + " and uid=" + user_id;
+                  
+                    FB.api('/me/likes/'+page_id, function(response) {
+                        alert('yeah');
+                        if (response.data[0]) {
+                            document.getElementById("like-wrong").style.display = 'none';
+                            document.getElementById("like-ok").style.display = 'block';
+                        } else {
+                            document.getElementById("like-wrong").style.display = 'block';
+                            document.getElementById("like-ok").style.display = 'none';
+                        }
+                    });
+                } else {
+                    // user is not logged in
+                }
+            });
+        });
       </script>
 
       <!-- like buttons -->
