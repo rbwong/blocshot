@@ -45,6 +45,9 @@
                     // user is not logged in
                 }
             });
+            FB.Event.subscribe('edge.create', function(response) {
+              alert('you liked this');
+            });
         });
       </script>
 
