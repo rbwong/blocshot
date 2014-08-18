@@ -28,6 +28,7 @@
       $(document).ready(function(){
           FB.getLoginStatus(function(response) {
               if (response.status == 'connected') {
+                  alert('woo');
                   var user_id = response.authResponse.userID;
                   var page_id = "319460261534495";
                   var fql_query = "SELECT uid FROM page_fan WHERE page_id =" + page_id + " and uid=" + user_id;
