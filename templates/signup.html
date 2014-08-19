@@ -25,14 +25,24 @@
           });
            FB.getLoginStatus(function(response) {
             if (response.status === 'connected') {
-              alert('logged');
+              FB.api(
+                  "/{user-id}/likes/{page-id}",
+                  function (response) {
+                    if (response && !response.error) {
+                      alert('liked');
+                    }
+                    else {
+                      alert('not liked');
+                    }
+                  }
+              );
             }
             else {
               FB.login();
             }
           });
         };
-        
+
         (function(d, s, id){
            var js, fjs = d.getElementsByTagName(s)[0];
            if (d.getElementById(id)) {return;}
