@@ -27,7 +27,7 @@
            FB.getLoginStatus(function(response) {
             if (response.status === 'connected') {
               FB.api(
-                  "/{user-id}/likes/{page-id}",
+                  "/me/likes/319460261534495",
                   function (response) {
                     if (response && !response.error) {
                       alert('liked');
