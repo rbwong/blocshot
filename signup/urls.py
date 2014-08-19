@@ -7,5 +7,5 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
                        url(r'^$', SignupPage.as_view(), name='signup_page'),
-                       (r'^channel/', login_required(TemplateView.as_view(template_name="channel.html"))),
+                       (r'^channel/', TemplateView.as_view(template_name="channel.html")),
                        )
