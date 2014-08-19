@@ -30,12 +30,10 @@
                   "/me/likes/319460261534495",
                   function (response) {
                     if (response && !response.error) {
-                      document.getElementById("like-wrong").style.display = 'none';
-                      document.getElementById("like-ok").style.display = 'block';
+                      alert('liked');
                     }
                     else {
-                      document.getElementById("like-wrong").style.display = 'block';
-                      document.getElementById("like-ok").style.display = 'none';
+                      alert('not liked');
                     }
                   }
               );
