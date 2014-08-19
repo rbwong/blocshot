@@ -31,26 +31,19 @@
                     var user_id = response.authResponse.userID;
                     var page_id = "319460261534495";
                     var fql_query = "SELECT uid FROM page_fan WHERE page_id=" + page_id + " and uid=" + user_id;
-                    
-                    FB.api({
-                        method:     "pages.isFan",
-                        page_id:     '319460261534495',
-                    },  function(response) {
-                            console.log(response);
-                            if(response){
-                              document.getElementById("like-wrong").style.display = 'none';
-                              document.getElementById("like-ok").style.display = 'block';
-                            } else {
-                              document.getElementById("like-wrong").style.display = 'block';
-                              document.getElementById("like-ok").style.display = 'none';
-                            }
+                  
+                    FB.api('/'+user_id+'/likes/'+page_id, function(response) { 
+                        if (response.data[0]) {
+                            document.getElementById("like-wrong").style.display = 'none';
+                            document.getElementById("like-ok").style.display = 'block';
+                        } else {
+                            document.getElementById("like-wrong").style.display = 'block';
+                            document.getElementById("like-ok").style.display = 'none';
                         }
-                    );
+                    });
                 } else {
                     // user is not logged in
                 }
-            });
-            FB.Event.subscribe('edge.create', function(response) {
             });
         });
       </script>
