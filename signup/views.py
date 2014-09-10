@@ -4,14 +4,19 @@ from django.core.urlresolvers import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic.edit import CreateView
+from django.views.generic import TemplateView
 
 from signup.models import Contact
+
+
+class IndexView(TemplateView):
+    template_name = "index.html"
 
 
 class SignupPage(SuccessMessageMixin, CreateView):
     model = Contact
     template_name = 'signup.html'
-    success_message = "You have successfuly pre-ordered an Engineering Survival Guide handbook! :)"
+    success_message = "You have successfuly registered for Bloc Shot 2014 :)"
 
     def get_success_url(self):
         return reverse_lazy('signup_page')

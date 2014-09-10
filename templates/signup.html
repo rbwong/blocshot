@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Engineering Survival Guide</title>
+    <title>Blocshot 2014</title>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- css -->
@@ -15,150 +15,119 @@
     <script src="{% static "js/jquery.js" %}"></script>
   </head>
   <body>
-      <script src="https://connect.facebook.net/en_US/all.js"></script>
-      <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId      : '632923070139972',
-            status     : true,
-            xfbml      : true,
-            version    : 'v2.0'
-          });
-           FB.getLoginStatus(function(response) {
-            if (response.status === 'connected') {
-              FB.api(
-                  "/me/likes/319460261534495",
-                  function (response) {
-                    if (response && !response.error) {
-                      document.getElementById("like-wrong").style.display = 'none';
-                      document.getElementById("like-ok").style.display = 'block';
-                    }
-                    else {
-                      document.getElementById("like-wrong").style.display = 'block';
-                      document.getElementById("like-ok").style.display = 'none';
-                    }
-                  }
-              );
-            }
-            else {
-              FB.login();
-            }
-          });
-        };
 
-        (function(d, s, id){
-           var js, fjs = d.getElementsByTagName(s)[0];
-           if (d.getElementById(id)) {return;}
-           js = d.createElement(s); js.id = id;
-           js.src = "//connect.facebook.net/en_US/sdk.js";
-           fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-      </script>
+       <!-- Contact -->
+        <section id="contact" class="home-section bg-white">
+          <div class="container">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                      <div class="section-heading">
+                      <h1>Registration for Blocshot 2014</h1>
+                      <p>Amorsolo Basketball Court, Brgy. UP Campus</p>
+                      <p>September 29, 2014</p>
+                      </div>
+                    </div>
+                </div>
 
-      <!-- gate handler -->
-      <div id="like-wrong">
-          <!-- like buttons -->
-          <div class="fb-like-box" data-href="https://www.facebook.com/upepsilonchi" data-width="300" data-height="100" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
-          Please like page to continue!
-      </div>
-      <div id="like-ok" style="display:none">
-          <!-- About -->
-          <section id="about" class="home-section bg-white">
-            <div class="container">
-                  <div class="row">
+              <div class="row">
+                  <div class="col-md-offset-1 col-md-10">
+                  {% for message in messages %}
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                          {{ message }}
+                        </div>
+                    {% endfor %}
+                  <form action="/register/" method="post" class="form-horizontal" role="form">
+                    {% csrf_token %}
+                    <div class="form-group">
                       <div class="col-md-offset-2 col-md-8">
-                        <div class="section-heading">
-                         <h2>Engineering Survival Guide</h2>
-                         <p></p>
-                         {% if messages %}
-                            <ul class="messages">
-                                {% for message in messages %}
-                                    <div class="alert alert-success" role="alert">{{ message }}</div>
-                                {% endfor %}
-                            </ul>
+                        <input type="text" class="form-control" id="inputName" placeholder="Bloc, ex. G-15" name="bloc">
+                        {% if form.name.errors %}
+                              <div class="alert alert-danger" role="alert">{{ form.bloc.errors }}</div>
                         {% endif %}
-                        </div>
                       </div>
-                  </div>
-                  <div class="row">
-                    <img src="{% static "img/cover.jpg" %}"></img>
-              </div>
-          </section>
-
-         <!-- Contact -->
-          <section id="contact" class="home-section bg-white">
-            <div class="container">
-                  <div class="row">
+                    </div>
+                    <div class="form-group">
                       <div class="col-md-offset-2 col-md-8">
-                        <div class="section-heading">
-                         <h2>Grab a copy now!</h2>
-                         <p>Contact via form below and we will be get in touch with you.</p>
-                        </div>
+                        <input type="text" class="form-control" id="inputName" placeholder="Team name" name="team_name">
+                        {% if form.name.errors %}
+                              <div class="alert alert-danger" role="alert">{{ form.team_name.errors }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-md-offset-2 col-md-8">
+                        <input type="text" class="form-control" id="inputEmail" placeholder="Phone no." name="phone_no">
+                        {% if form.phone_no.errors %}
+                              <div class="alert alert-danger" role="alert">{{ form.phone_no.errors }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-md-offset-2 col-md-8">
+                        <input type="text" class="form-control" id="inputSubject" placeholder="Player 1 name" name="player1">
+                        {% if form.bloc.errors %}
+                              <div class="alert alert-danger" role="alert">{{ form.player1.errors }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-md-offset-2 col-md-8">
+                        <input type="text" class="form-control" id="inputSubject" placeholder="Player 2 name" name="player2">
+                        {% if form.bloc.errors %}
+                              <div class="alert alert-danger" role="alert">{{ form.player2.errors }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-md-offset-2 col-md-8">
+                        <input type="text" class="form-control" id="inputSubject" placeholder="Player 3 name" name="player3">
+                        {% if form.bloc.errors %}
+                              <div class="alert alert-danger" role="alert">{{ form.player3.errors }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-md-offset-2 col-md-8">
+                        <input type="text" class="form-control" id="inputSubject" placeholder="Player 4 name (optional)" name="player4">
+                        {% if form.bloc.errors %}
+                              <div class="alert alert-danger" role="alert">{{ form.player4.errors }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-md-offset-2 col-md-8">
+                        <input type="text" class="form-control" id="inputSubject" placeholder="Player 5 name (optional)" name="player5">
+                        {% if form.bloc.errors %}
+                              <div class="alert alert-danger" role="alert">{{ form.player5.errors }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-md-offset-2 col-md-8">
+                       <button type="submit" class="btn btn-theme btn-lg btn-block">Register</button>
+                      </div>
+                    </div>
+                  </form>
+
+                  </div>
+              </div>
+          </div>
+        </section>
+
+      <!-- spacer 2 -->
+      <section id="spacer2" class="home-section spacer">
+         <div class="container">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="color-light">
+                      <h2 class="wow bounceInDown" data-wow-delay="1s">Brought to you by</h2>
+                      <img src="{% static "img/seal.png" %}" style="width: 250px; height: auto;"></img>
                       </div>
                   </div>
-
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-10">
-                    <form action="/" method="post" class="form-horizontal" role="form">
-                      {% csrf_token %}
-                      <div class="form-group">
-                        <div class="col-md-offset-2 col-md-8">
-                          <input type="text" class="form-control" id="inputName" placeholder="Name" name="name">
-                          {% if form.name.errors %}
-                                <div class="alert alert-danger" role="alert">{{ form.name.errors }}</div>
-                          {% endif %}
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-md-offset-2 col-md-8">
-                          <input type="text" class="form-control" id="inputEmail" placeholder="Phone no." name="phone_no">
-                          {% if form.phone_no.errors %}
-                                <div class="alert alert-danger" role="alert">{{ form.phone_no.errors }}</div>
-                          {% endif %}
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-md-offset-2 col-md-8">
-                          <input type="text" class="form-control" id="inputSubject" placeholder="Bloc: ex. G-22" name="bloc">
-                          {% if form.bloc.errors %}
-                                <div class="alert alert-danger" role="alert">{{ form.bloc.errors }}</div>
-                          {% endif %}
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-md-offset-2 col-md-8">
-                          <input type="text" class="form-control" id="inputSubject" placeholder="facebook url: ex. www.facebook.com/juandelacruz" name="facebook">
-                          {% if form.facebook.errors %}
-                                <div class="alert alert-danger" role="alert">{{ form.facebook.errors }}</div>
-                          {% endif %}
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="col-md-offset-2 col-md-8">
-                         <button type="submit" class="btn btn-theme btn-lg btn-block">Submit Form</button>
-                        </div>
-                      </div>
-                    </form>
-
-                    </div>
-                </div>
-            </div>
-          </section>
-
-        <!-- spacer 2 -->
-        <section id="spacer" class="home-section spacer">
-           <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="color-light">
-                        <h2 class="wow bounceInDown" data-wow-delay="1s">Brought to you by</h2>
-                        <img src="{% static "img/seal.png" %}" style="width: 250px; height: auto;"></img>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-      </div>
+              </div>
+          </div>
+      </section>
 
      <!-- js -->
     <script src="{% static "js/jquery.js" %}"></script>
@@ -167,36 +136,5 @@
     <script src="{% static "js/jquery.dlmenu.js" %}"></script>
     <script src="{% static "js/wow.min.js" %}"></script>
     <script src="{% static "js/custom.js" %}"></script>
-    <script type="text/javascript">
-      $(document).ready(function(){
-
-        FB.login(function(response) {
-          if (response.session) {
-
-              var user_id = response.session.uid;
-              var page_id = "632923070139972"; //coca cola
-              var fql_query = "SELECT uid FROM page_fan WHERE page_id = "+page_id+"and uid="+user_id;
-              var the_query = FB.Data.query(fql_query);
-
-              the_query.wait(function(rows) {
-
-                  if (rows.length == 1 && rows[0].uid == user_id) {
-                      alert('yeah!');
-                      //here you could also do some ajax and get the content for a "liker" instead of simply showing a hidden div in the page.
-
-                  } else {
-                      alert('boo!');
-                      //and here you could get the content for a non liker in ajax...
-                  }
-              });
-
-
-          } else {
-            // user is not logged in
-          }
-        });
-
-    });
-    </script>
 
 </html>
