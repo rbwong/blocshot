@@ -7,6 +7,5 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
                        url(r'^$', IndexView.as_view(), name='home_page'),
-                       url(r'^register/$', SignupPage.as_view(), name='signup_page'),
                        (r'^channel/', TemplateView.as_view(template_name="channel.html")),
                        )
